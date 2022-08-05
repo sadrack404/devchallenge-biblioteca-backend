@@ -3,6 +3,7 @@ package DevChallenger.bibliotecabackend.domain.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -12,10 +13,10 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(nullable = false,name = "name")
     private String authorName;
 
-    @Column
-    private int age;
+    @Column(nullable = false)
+    private LocalDate birthDate;
 
 }

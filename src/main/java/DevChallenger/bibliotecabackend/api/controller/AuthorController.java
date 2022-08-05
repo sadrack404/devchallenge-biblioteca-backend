@@ -1,6 +1,6 @@
 package DevChallenger.bibliotecabackend.api.controller;
 
-import DevChallenger.bibliotecabackend.domain.Exception.EnitityException;
+import DevChallenger.bibliotecabackend.domain.Exception.EntityException;
 import DevChallenger.bibliotecabackend.domain.Exception.IdNotFoundException;
 import DevChallenger.bibliotecabackend.domain.model.Author;
 import DevChallenger.bibliotecabackend.domain.repository.AurhorRepository;
@@ -25,9 +25,10 @@ public class AuthorController {
     }
 
     @GetMapping("/{id}")
-    public Author listOneAuthor(Long id){
+    public Author listOneAuthor(@PathVariable Long id){
         return authorService.validAuthor(id);
     }
+
     @PostMapping
     public Author registerAuthor(@RequestBody Author author){
         return authorService.registrerAuthor(author);
@@ -40,12 +41,12 @@ public class AuthorController {
         try {
            return authorService.registrerAuthor(authorNew);
         } catch (IdNotFoundException e) {
-            throw new EnitityException(e.getMessage());
+            throw new EntityException(e.getMessage());
         }
     }
+
     @DeleteMapping("/{id}")
     public void deleteAuthor (@PathVariable Long id){
-       var a  = authorService.validAuthor(id);
        authorService.deleteAuthor(id);
     }
 }

@@ -16,6 +16,7 @@ public class PublisherService {
     public Publisher registrerPublisher(Publisher publisher){
         return publisherRepository.save(publisher);
     }
+
     public void deletePublisher (Long id){
         try {
             publisherRepository.deleteById(id);
@@ -26,6 +27,13 @@ public class PublisherService {
         };
     }
 
+    public Publisher validPublisher(Long id){
+        return publisherRepository.findById(id).orElseThrow(
+                () -> new IdNotFoundException(
+                        String.format("Id não encontado %d", id)
+                )
+        );
+    }
 
 
 }
